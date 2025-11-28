@@ -1,0 +1,54 @@
+# CMake build directories
+build/
+cmake-build-*/
+out/
+
+# Compiled executables
+*.exe
+touchstone_converter
+*.out
+*.app
+
+# Object files
+*.o
+*.obj
+*.a
+*.lib
+
+# IDE files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/c_cpp_properties.json
+.vscode/extensions.json
+
+# macOS
+.DS_Store
+*.dSYM
+*.dSYM/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Debug files
+debug_output.ts
+output.ts
+script_output.ts
+
+# Test files
+test_vscode.cpp
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Log files
+*.log

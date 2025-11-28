@@ -1,0 +1,4 @@
+! S parameters
+# GHz S DB R 50
+!  Sample 2-port S-parameter data in Touchstone v2 format
+!  This demonstrates the enhanced v2 format with structured headers
