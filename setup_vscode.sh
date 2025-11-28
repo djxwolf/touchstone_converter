@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# VS Code C++环境配置脚本 (macOS)
-echo "🔧 配置VS Code C++开发环境..."
+# VS Code C++ Environment Configuration Script (macOS)
+echo "🔧 Configuring VS Code C++ development environment..."
 
-# 颜色定义
+# Color definitions
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -12,20 +12,20 @@ NC='\033[0m' # No Color
 
 PROJECT_DIR="/Users/wenjian/work/touchstone_converter"
 
-echo -e "${BLUE}当前项目目录: $PROJECT_DIR${NC}"
+echo -e "${BLUE}Current project directory: $PROJECT_DIR${NC}"
 
-# 检查项目目录
+# Check project directory
 if [ ! -d "$PROJECT_DIR" ]; then
-    echo -e "${RED}错误: 找不到项目目录 $PROJECT_DIR${NC}"
+    echo -e "${RED}Error: Project directory not found $PROJECT_DIR${NC}"
     exit 1
 fi
 
-# 检查Xcode命令行工具
-echo -e "\n${YELLOW}检查开发工具...${NC}"
+# Check Xcode Command Line Tools
+echo -e "\n${YELLOW}Checking development tools...${NC}"
 if [ -d "/Library/Developer/CommandLineTools" ]; then
-    echo -e "${GREEN}✓ Xcode命令行工具已安装${NC}"
+    echo -e "${GREEN}✓ Xcode Command Line Tools installed${NC}"
 
-    # 检查可用的SDK
+    # Check可用的SDK
     SDK_BASE="/Library/Developer/CommandLineTools/SDKs"
     if [ -d "$SDK_BASE" ]; then
         echo -e "${GREEN}✓ 可用的SDK:${NC}"
@@ -37,7 +37,7 @@ else
     exit 1
 fi
 
-# 检查编译器
+# Check编译器
 echo -e "\n${YELLOW}检查编译器...${NC}"
 if command -v clang++ >/dev/null 2>&1; then
     echo -e "${GREEN}✓ Clang++: $(clang++ --version | head -1)${NC}"
@@ -46,7 +46,7 @@ else
     exit 1
 fi
 
-# 检查CMake
+# CheckCMake
 if command -v cmake >/dev/null 2>&1; then
     echo -e "${GREEN}✓ CMake: $(cmake --version | head -1)${NC}"
 else
@@ -55,13 +55,13 @@ else
     exit 1
 fi
 
-# 检查VS Code扩展
+# CheckVS Code扩展
 echo -e "\n${YELLOW}推荐的VS Code扩展:${NC}"
 echo -e "${BLUE}  • C/C++ (Microsoft)${NC}"
 echo -e "${BLUE}  • CMake Tools (Microsoft)${NC}"
 echo -e "${BLUE}  • C/C++ Extension Pack (Microsoft)${NC}"
 
-# 创建简化配置
+# Create简化配置
 echo -e "\n${YELLOW}生成VS Code配置文件...${NC}"
 
 # 更新c_cpp_properties.json为简化版本
@@ -90,7 +90,7 @@ EOF
 cp "$PROJECT_DIR/.vscode/c_cpp_properties_simple.json" "$PROJECT_DIR/.vscode/c_cpp_properties.json"
 echo -e "${GREEN}✓ 已更新c_cpp_properties.json${NC}"
 
-# 创建测试用的简单文件
+# Create测试用的简单文件
 cat > "$PROJECT_DIR/test_vscode.cpp" << 'EOF'
 // 测试VS Code C++配置
 #include <iostream>
@@ -119,7 +119,7 @@ EOF
 
 echo -e "${GREEN}✓ 已创建测试文件 test_vscode.cpp${NC}"
 
-# 创建VS Code启动配置
+# CreateVS Code启动配置
 cat > "$PROJECT_DIR/.vscode/settings_simple.json" << 'EOF'
 {
     "C_Cpp.intelliSenseEngine": "default",

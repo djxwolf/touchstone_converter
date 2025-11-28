@@ -4,18 +4,18 @@
 #include <exception>
 
 void printUsage(const char* programName) {
-    std::cout << "Touchstone格式转换器 v1.0" << std::endl;
-    std::cout << "用法: " << programName << " <转换模式> <输入文件> <输出文件>" << std::endl;
+    std::cout << "Touchstone Format Converter v1.0" << std::endl;
+    std::cout << "Usage: " << programName << " <conversion_mode> <input_file> <output_file>" << std::endl;
     std::cout << std::endl;
-    std::cout << "转换模式:" << std::endl;
-    std::cout << "  v1tov2   将Touchstone v1格式转换为v2格式" << std::endl;
-    std::cout << "  v2tov1   将Touchstone v2格式转换为v1格式" << std::endl;
+    std::cout << "Conversion Modes:" << std::endl;
+    std::cout << "  v1tov2   Convert Touchstone v1 format to v2 format" << std::endl;
+    std::cout << "  v2tov1   Convert Touchstone v2 format to v1 format" << std::endl;
     std::cout << std::endl;
-    std::cout << "示例:" << std::endl;
+    std::cout << "Examples:" << std::endl;
     std::cout << "  " << programName << " v1tov2 input.s2p output.ts" << std::endl;
     std::cout << "  " << programName << " v2tov1 input.ts output.s2p" << std::endl;
     std::cout << std::endl;
-    std::cout << "支持格式:" << std::endl;
+    std::cout << "Supported Formats:" << std::endl;
     std::cout << "  Touchstone v1: .s1p, .s2p, .s3p, .s4p" << std::endl;
     std::cout << "  Touchstone v2: .ts" << std::endl;
 }
@@ -31,23 +31,23 @@ int main(int argc, char* argv[]) {
         std::string inputFile = argv[2];
         std::string outputFile = argv[3];
 
-        std::cout << "Touchstone格式转换器" << std::endl;
-        std::cout << "输入文件: " << inputFile << std::endl;
-        std::cout << "输出文件: " << outputFile << std::endl;
-        std::cout << "转换模式: " << mode << std::endl;
+        std::cout << "Touchstone Format Converter" << std::endl;
+        std::cout << "Input file: " << inputFile << std::endl;
+        std::cout << "Output file: " << outputFile << std::endl;
+        std::cout << "Conversion mode: " << mode << std::endl;
         std::cout << "------------------------" << std::endl;
 
         if (mode == "v1tov2") {
-            std::cout << "正在将Touchstone v1格式转换为v2格式..." << std::endl;
+            std::cout << "Converting Touchstone v1 format to v2 format..." << std::endl;
             TouchstoneConverter::convertV1toV2(inputFile, outputFile);
-            std::cout << "转换完成!" << std::endl;
+            std::cout << "Conversion completed!" << std::endl;
         } else if (mode == "v2tov1") {
-            std::cout << "正在将Touchstone v2格式转换为v1格式..." << std::endl;
+            std::cout << "Converting Touchstone v2 format to v1 format..." << std::endl;
             TouchstoneConverter::convertV2toV1(inputFile, outputFile);
-            std::cout << "转换完成!" << std::endl;
+            std::cout << "Conversion completed!" << std::endl;
         } else {
-            std::cerr << "错误: 无效的转换模式 '" << mode << "'" << std::endl;
-            std::cerr << "支持的模式: v1tov2, v2tov1" << std::endl;
+            std::cerr << "Error: Invalid conversion mode '" << mode << "'" << std::endl;
+            std::cerr << "Supported modes: v1tov2, v2tov1" << std::endl;
             printUsage(argv[0]);
             return 1;
         }
@@ -55,10 +55,10 @@ int main(int argc, char* argv[]) {
         return 0;
 
     } catch (const std::exception& e) {
-        std::cerr << "错误: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     } catch (...) {
-        std::cerr << "未知错误发生" << std::endl;
+        std::cerr << "Unknown error occurred" << std::endl;
         return 1;
     }
 }

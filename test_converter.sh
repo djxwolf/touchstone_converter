@@ -1,75 +1,75 @@
 #!/bin/bash
 
-# Touchstone转换器测试脚本
+# Touchstone Converter Test Script
 
-echo "=== Touchstone格式转换器测试 ==="
+echo "=== Touchstone Format Converter Test ==="
 echo
 
-# 设置颜色
+# Set colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# 测试函数
+# Test function
 test_conversion() {
     local mode=$1
     local input=$2
     local output=$3
     local description=$4
 
-    echo -e "${YELLOW}测试: $description${NC}"
-    echo "命令: $mode $input $output"
+    echo -e "${YELLOW}Test: $description${NC}"
+    echo "Command: $mode $input $output"
 
     if ./touchstone_converter "$mode" "$input" "$output"; then
-        echo -e "${GREEN}✓ 转换成功${NC}"
+        echo -e "${GREEN}✓ Conversion successful${NC}"
         if [ -f "$output" ]; then
-            echo "输出文件大小: $(stat -f%z "$output" 2>/dev/null || stat -c%s "$output" 2>/dev/null || echo "未知") 字节"
-            echo "前5行输出:"
+            echo "Output file size: $(stat -f%z "$output" 2>/dev/null || stat -c%s "$output" 2>/dev/null || echo "unknown") bytes"
+            echo "First 5 lines of output:"
             head -5 "$output" | sed 's/^/  /'
         fi
     else
-        echo -e "${RED}✗ 转换失败${NC}"
+        echo -e "${RED}✗ Conversion failed${NC}"
     fi
     echo "----------------------------------------"
     echo
 }
 
-# 进入build目录
+# Enter build directory
 cd "$(dirname "$0")/build" || {
-    echo "错误: 无法进入build目录"
-    echo "请先运行: mkdir build && cd build && cmake .. && make"
+    echo "Error: Cannot enter build directory"
+    echo "Please run first: mkdir build && cd build && cmake .. && make"
     exit 1
 }
 
-# 检查可执行文件
+# Check executable
 if [ ! -f "./touchstone_converter" ]; then
-    echo "错误: 找不到touchstone_converter可执行文件"
-    echo "请先编译项目"
+    echo "Error: Cannot find touchstone_converter executable"
+    echo "Please build the project first"
     exit 1
 fi
 
-echo "可执行文件: $(realpath ./touchstone_converter)"
+echo "Executable: $(realpath ./touchstone_converter)"
 echo
 
-# 运行测试
-test_conversion "v1tov2" "../examples/sample.s2p" "../examples/test1_output.ts" "v1到v2格式转换 (MA格式)"
-test_conversion "v1tov2" "../examples/sample_ri.s2p" "../examples/test2_output.ts" "v1到v2格式转换 (RI格式)"
-test_conversion "v2tov1" "../examples/sample_v2.ts" "../examples/test3_output.s2p" "v2到v1格式转换"
-test_conversion "v2tov1" "../examples/test1_output.ts" "../examples/test4_output.s2p" "转换回去测试"
+# Run tests
+test_conversion "v1tov2" "../examples/sample.s2p" "../examples/test1_output.ts" "v1 to v2 format conversion (MA format)"
+test_conversion "v1tov2" "../examples/sample_ri.s2p" "../examples/test2_output.ts" "v1 to v2 format conversion (RI format)"
+test_conversion "v2tov1" "../examples/sample_v2.ts" "../examples/test3_output.s2p" "v2 to v1 format conversion"
+test_conversion "v2tov1" "../examples/test1_output.ts" "../examples/test4_output.s2p" "Convert back test"
 
-# 错误测试
-echo -e "${YELLOW}错误处理测试:${NC}"
-echo "1. 测试无效参数..."
+# Error handling tests
+echo -e "${YELLOW}Error handling tests:${NC}"
+echo "1. Testing invalid parameters..."
 ./touchstone_converter invalid_mode input.s2p output.ts 2>&1 | head -3
 echo
 
-echo "2. 测试不存在的文件..."
+echo "2. Testing non-existent file..."
 ./touchstone_converter v1tov2 nonexistent.s2p output.ts 2>&1 | head -3
 echo
 
-echo "3. 测试缺少参数..."
+echo "3. Testing missing parameters..."
 ./touchstone_converter v1tov2 input.s2p 2>&1 | head -3
 echo
 
-echo -e "${GREEN}=== 测试完成 ===${NC}"
+echo -e "${GREEN}=== Tests Completed ===${NC}"

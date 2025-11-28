@@ -1,163 +1,163 @@
-# Touchstone格式转换器
+# Touchstone Format Converter
 
-一个用于在Touchstone v1和v2格式之间进行转换的C++应用程序。
+A C++ application for converting between Touchstone v1 and v2 formats.
 
-## 功能特性
+## Features
 
-- ✅ 支持Touchstone v1格式 (.s1p, .s2p, .s3p, .s4p)
-- ✅ 支持Touchstone v2格式 (.ts)
-- ✅ 支持多种数据格式：MA（幅度/角度）、DB_ANGLE（dB/角度）、RI（实部/虚部）
-- ✅ 支持多种网络参数类型：S、Y、Z、H、G、A参数
-- ✅ 跨平台支持（Windows、Linux、macOS）
-- ✅ VS Code集成开发环境支持
+- ✅ Support for Touchstone v1 format (.s1p, .s2p, .s3p, .s4p)
+- ✅ Support for Touchstone v2 format (.ts)
+- ✅ Support for multiple data formats: MA (Magnitude/Angle), DB_ANGLE (dB/Angle), RI (Real/Imaginary)
+- ✅ Support for multiple network parameter types: S, Y, Z, H, G, A parameters
+- ✅ Cross-platform support (Windows, Linux, macOS)
+- ✅ VS Code integrated development environment support
 
-## 项目结构
+## Project Structure
 
 ```
 touchstone_converter/
 ├── include/
-│   └── touchstone.h          # 主要头文件
+│   └── touchstone.h          # Main header file
 ├── src/
-│   ├── main.cpp              # 程序入口点
-│   └── touchstone.cpp        # 核心实现
+│   ├── main.cpp              # Program entry point
+│   └── touchstone.cpp        # Core implementation
 ├── examples/
-│   ├── sample.s2p           # v1格式示例文件
-│   ├── sample_ri.s2p        # v1格式示例文件（实部/虚部）
-│   └── sample_v2.ts         # v2格式示例文件
+│   ├── sample.s2p           # v1 format example file
+│   ├── sample_ri.s2p        # v1 format example file (Real/Imaginary)
+│   └── sample_v2.ts         # v2 format example file
 ├── .vscode/
-│   ├── tasks.json           # VS Code构建任务
-│   ├── launch.json          # VS Code调试配置
-│   ├── settings.json        # VS Code项目设置
-│   └── c_cpp_properties.json # C++配置
-├── build/                   # 构建输出目录
-├── CMakeLists.txt           # CMake配置文件
-└── README.md                # 项目说明文档
+│   ├── tasks.json           # VS Code build tasks
+│   ├── launch.json          # VS Code debug configuration
+│   ├── settings.json        # VS Code project settings
+│   └── c_cpp_properties.json # C++ configuration
+├── build/                   # Build output directory
+├── CMakeLists.txt           # CMake configuration file
+└── README.md                # Project documentation
 ```
 
-## 编译要求
+## Build Requirements
 
-- C++17或更高版本
-- CMake 3.10或更高版本
-- 支持的编译器：
+- C++17 or higher
+- CMake 3.10 or higher
+- Supported compilers:
   - GCC 7.0+
   - Clang 6.0+
   - MSVC 2017+
 
-## 编译说明
+## Build Instructions
 
-### 使用VS Code（推荐）
+### Using VS Code (Recommended)
 
-1. 在VS Code中打开项目文件夹：
+1. Open the project folder in VS Code:
    ```bash
    code touchstone_converter/
    ```
 
-2. VS Code会自动配置CMake工具，首次打开时会询问构建配置，选择"Debug"
+2. VS Code will automatically configure CMake tools. When first opened, it will ask for build configuration. Select "Debug".
 
-3. **macOS用户注意**：使用`Cmd+Shift+B`构建项目（不是Ctrl+Shift+B）
+3. **macOS users note**: Use `Cmd+Shift+B` to build the project (not Ctrl+Shift+B)
 
-   或者使用命令面板（`Cmd+Shift+P`）选择"Tasks: Run Task"，然后选择"CMake Build"
+   Or use the Command Palette (`Cmd+Shift+P`) and select "Tasks: Run Task", then choose "CMake Build".
 
-4. 如果快捷键不工作，请查看 [MACOS_GUIDE.md](MACOS_GUIDE.md) 获取详细说明
+4. If the shortcuts don't work, see [MACOS_GUIDE.md](MACOS_GUIDE.md) for detailed instructions.
 
-### 手动编译
+### Manual Build
 
 ```bash
-# 创建构建目录
+# Create build directory
 cd touchstone_converter
 mkdir build
 cd build
 
-# 配置CMake
+# Configure CMake
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 
-# 编译
+# Build
 cmake --build .
 
-# 或者使用make（Linux/macOS）
+# Or use make (Linux/macOS)
 make
 ```
 
-## 使用方法
+## Usage
 
-### 命令行格式
+### Command Line Format
 
 ```bash
-./touchstone_converter <转换模式> <输入文件> <输出文件>
+./touchstone_converter <conversion_mode> <input_file> <output_file>
 ```
 
-### 转换模式
+### Conversion Modes
 
-- `v1tov2`: 将Touchstone v1格式转换为v2格式
-- `v2tov1`: 将Touchstone v2格式转换为v1格式
+- `v1tov2`: Convert Touchstone v1 format to v2 format
+- `v2tov1`: Convert Touchstone v2 format to v1 format
 
-### 使用示例
+### Usage Examples
 
-#### v1转v2
+#### v1 to v2
 ```bash
-# 转换2端口S参数文件
+# Convert 2-port S-parameter file
 ./touchstone_converter v1tov2 examples/sample.s2p output.ts
 
-# 转换实部/虚部格式
+# Convert real/imaginary format
 ./touchstone_converter v1tov2 examples/sample_ri.s2p output_ri.ts
 ```
 
-#### v2转v1
+#### v2 to v1
 ```bash
-# 转换为v1格式
+# Convert to v1 format
 ./touchstone_converter v2tov1 examples/sample_v2.ts output.s2p
 ```
 
-## VS Code调试
+## VS Code Debugging
 
-在VS Code中，您可以：
+In VS Code, you can:
 
-1. 设置断点：在代码行号左侧点击
-2. 启动调试：按`F5`或选择"Run > Start Debugging"
-3. 调试时可以选择转换模式、输入文件和输出文件
+1. Set breakpoints: Click on the left side of line numbers
+2. Start debugging: Press `F5` or select "Run > Start Debugging"
+3. Select conversion mode, input file, and output file when debugging
 
-## 支持的格式
+## Supported Formats
 
-### Touchstone v1格式
+### Touchstone v1 Format
 
-- 文件扩展名：`.s1p`, `.s2p`, `.s3p`, `.s4p`
-- 选项行格式：`# GHz S MA R 50`
-- 数据格式：
-  - **MA**: 幅度 角度
-  - **DB**: dB值 角度
-  - **RI**: 实部 虚部
+- File extensions: `.s1p`, `.s2p`, `.s3p`, `.s4p`
+- Option line format: `# GHz S MA R 50`
+- Data formats:
+  - **MA**: Magnitude Angle
+  - **DB**: dB value Angle
+  - **RI**: Real Imaginary
 
-### Touchstone v2格式
+### Touchstone v2 Format
 
-- 文件扩展名：`.ts`
-- 结构化头部信息
-- 支持元数据和注释
-- 更好的错误处理和验证
+- File extensions: `.ts`
+- Structured header information
+- Support for metadata and comments
+- Better error handling and validation
 
-## 错误处理
+## Error Handling
 
-程序包含完整的错误处理机制：
+The program includes comprehensive error handling:
 
-- 文件访问错误
-- 格式解析错误
-- 数据验证错误
-- 内存分配错误
+- File access errors
+- Format parsing errors
+- Data validation errors
+- Memory allocation errors
 
-所有错误都会显示详细的中文错误信息。
+All errors display detailed English error messages.
 
-## 扩展功能
+## Extensibility
 
-该项目设计为可扩展的，您可以轻松添加：
+This project is designed to be extensible. You can easily add:
 
-- 其他参数类型支持
-- 不同的数据格式
-- 额外的验证功能
-- 性能优化
+- Additional parameter type support
+- Different data formats
+- Extra validation features
+- Performance optimizations
 
-## 许可证
+## License
 
-本项目采用MIT许可证，详见LICENSE文件。
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-## 贡献
+## Contributing
 
-欢迎提交问题报告和功能请求！
+Bug reports and feature requests are welcome!

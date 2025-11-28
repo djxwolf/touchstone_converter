@@ -1,68 +1,68 @@
-# macOS上使用Touchstone转换器指南
+# macOS Touchstone Converter Guide
 
-## VS Code快捷键 (macOS)
+## VS Code Shortcuts (macOS)
 
-### 重要快捷键
-- ⌘+Shift+B: 构建项目 (不是Ctrl+Shift+B)
-- ⌘+Shift+P: 打开命令面板
-- F5: 开始调试
-- ⌘+/: 切换注释
+### Important Shortcuts
+- ⌘+Shift+B: Build project (not Ctrl+Shift+B)
+- ⌘+Shift+P: Open Command Palette
+- F5: Start debugging
+- ⌘+/: Toggle comment
 
-### VS Code中构建项目
+### Building Project in VS Code
 
-#### 方法1: 使用快捷键
-1. 在VS Code中打开项目
-2. 按 `⌘+Shift+B` 选择构建任务
+#### Method 1: Using Shortcuts
+1. Open project in VS Code
+2. Press `⌘+Shift+B` to select build task
 
-#### 方法2: 使用命令面板
-1. 按 `⌘+Shift+P`
-2. 输入 "Tasks: Run Task"
-3. 选择 "CMake Build"
+#### Method 2: Using Command Palette
+1. Press `⌘+Shift+P`
+2. Type "Tasks: Run Task"
+3. Select "CMake Build"
 
-#### 方法3: 使用终端
-1. 在VS Code中按 `⌘+\`` 打开集成终端
-2. 运行以下命令：
+#### Method 3: Using Terminal
+1. Press `⌘+\`` in VS Code to open integrated terminal
+2. Run the following commands:
 
 ```bash
-# 如果build目录不存在
+# If build directory doesn't exist
 mkdir -p build
 
-# 配置CMake
+# Configure CMake
 cmake -B build -S . -DCMAKE_BUILD_TYPE=Debug
 
-# 编译
+# Build
 cmake --build build
 ```
 
-## 运行程序
+## Running the Program
 
-### 在VS Code终端中
+### In VS Code Terminal
 ```bash
 cd build
 ./touchstone_converter v1tov2 ../examples/sample.s2p output.ts
 ```
 
-### 使用命令面板运行
-1. 按 `⌘+Shift+P`
-2. 输入 "Tasks: Run Task"
-3. 选择 "Run Converter"
+### Using Command Palette to Run
+1. Press `⌘+Shift+P`
+2. Type "Tasks: Run Task"
+3. Select "Run Converter"
 
-## 调试程序
+## Debugging Program
 
-1. 在代码中设置断点（点击行号左侧）
-2. 按 `F5` 开始调试
-3. 在弹出的对话框中选择配置（通常默认即可）
+1. Set breakpoints in code (click left side of line numbers)
+2. Press `F5` to start debugging
+3. Select configuration in dialog (usually default is fine)
 
-## 常见问题解决
+## Common Troubleshooting
 
-### 如果快捷键不工作
-1. 检查VS Code是否是最新版本
-2. 重启VS Code
-3. 使用命令面板 (`⌘+Shift+P`) 手动运行任务
+### If Shortcuts Don't Work
+1. Check if VS Code is latest version
+2. Restart VS Code
+3. Use Command Palette (`⌘+Shift+P`) to manually run tasks
 
-### 如果编译失败
+### If Build Fails
 ```bash
-# 清理并重新编译
+# Clean and rebuild
 rm -rf build
 mkdir build
 cd build
@@ -70,19 +70,19 @@ cmake ..
 make
 ```
 
-### 如果找不到可执行文件
+### If Executable Not Found
 ```bash
-# 检查是否在正确的目录
+# Check if in correct directory
 cd /Users/wenjian/work/touchstone_converter/build
 ls -la touchstone_converter
 ```
 
-## 一键脚本
+## One-Click Script
 
-创建一个便于使用的脚本：
+Create a convenient script:
 
 ```bash
-# 在项目根目录创建
+# Create in project root directory
 cat > run_converter.sh << 'EOF'
 #!/bin/bash
 cd /Users/wenjian/work/touchstone_converter/build
@@ -92,45 +92,45 @@ EOF
 chmod +x run_converter.sh
 ```
 
-现在可以直接使用：
+Now you can use directly:
 ```bash
 ./run_converter.sh v1tov2 examples/sample.s2p output.ts
 ```
 
-## 验证安装
+## Verify Installation
 
-运行完整测试：
+Run complete tests:
 ```bash
 ./test_converter.sh
 ```
 
-## VS Code扩展推荐
+## Recommended VS Code Extensions
 
-安装以下扩展以获得更好的体验：
+Install the following extensions for better experience:
 1. C/C++ (Microsoft)
 2. CMake Tools (Microsoft)
 3. CMake Language Support (twxs)
 
-## 环境检查
+## Environment Check
 
-确保您的环境正确配置：
+Ensure your environment is properly configured:
 
 ```bash
-# 检查编译器
+# Check compiler
 clang++ --version
 
-# 检查CMake
+# Check CMake
 cmake --version
 
-# 检查Xcode命令行工具
+# Check Xcode command line tools
 xcode-select --print-path
 ```
 
-如果任何工具未安装，运行：
+If any tool is not installed, run:
 ```bash
-# 安装Xcode命令行工具
+# Install Xcode command line tools
 xcode-select --install
 
-# 安装CMake (如果没有)
+# Install CMake (if not available)
 brew install cmake
 ```

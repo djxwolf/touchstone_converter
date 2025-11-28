@@ -1,110 +1,110 @@
-# 快速开始指南
+# Quick Start Guide
 
-## 1. 在VS Code中打开项目
+## 1. Open Project in VS Code
 
 ```bash
 cd touchstone_converter
 code .
 ```
 
-## 2. 编译项目
+## 2. Build Project
 
-VS Code会自动检测CMake项目，首次打开时会询问构建配置。
+VS Code will automatically detect CMake project and ask for build configuration when first opened.
 
-### 手动编译（如果需要）
+### Manual Build (if needed)
 
 ```bash
-# 创建构建目录
+# Create build directory
 mkdir build
 cd build
 
-# 配置CMake
+# Configure CMake
 cmake ..
 
-# 编译
+# Build
 make
 ```
 
-## 3. 运行转换
+## 3. Run Conversion
 
-### 基本用法
+### Basic Usage
 
 ```bash
-# v1转v2
+# v1 to v2
 ./build/touchstone_converter v1tov2 examples/sample.s2p output.ts
 
-# v2转v1
+# v2 to v1
 ./build/touchstone_converter v2tov1 examples/sample_v2.ts output.s2p
 ```
 
-### 在VS Code中运行
+### Running in VS Code
 
-1. 按 `Ctrl+Shift+B` (或 `Cmd+Shift+B` on Mac) 构建项目
-2. 按 `Ctrl+Shift+P` 选择 "Tasks: Run Task"
-3. 选择 "Run Converter"
-4. 输入转换模式、输入文件和输出文件
+1. Press `Ctrl+Shift+B` (or `Cmd+Shift+B` on Mac) to build project
+2. Press `Ctrl+Shift+P` select "Tasks: Run Task"
+3. Select "Run Converter"
+4. Enter conversion mode, input file and output file
 
-## 4. 调试
+## 4. Debugging
 
-1. 在代码中设置断点
-2. 按 `F5` 启动调试
-3. 选择转换模式和文件
+1. Set breakpoints in code
+2. Press `F5` to start debugging
+3. Select conversion mode and files
 
-## 5. 运行测试
+## 5. Run Tests
 
 ```bash
-# 运行完整测试套件
+# Run complete test suite
 ./test_converter.sh
 
-# 或者进入build目录运行
+# Or go to build directory and run
 cd build
 ../test_converter.sh
 ```
 
-## 6. 示例文件
+## 6. Example Files
 
-- `examples/sample.s2p` - Touchstone v1格式示例
-- `examples/sample_ri.s2p` - v1格式（实部/虚部）
-- `examples/sample_v2.ts` - Touchstone v2格式示例
+- `examples/sample.s2p` - Touchstone v1 format example
+- `examples/sample_ri.s2p` - v1 format (Real/Imaginary)
+- `examples/sample_v2.ts` - Touchstone v2 format example
 
-## 常见问题
+## Common Issues
 
-### 编译错误
+### Build Errors
 
-如果遇到编译错误，请确保：
+If you encounter build errors, ensure:
 
-1. 已安装Xcode Command Line Tools (macOS)
-2. 使用C++17兼容的编译器
+1. Xcode Command Line Tools are installed (macOS)
+2. Using C++17 compatible compiler
 3. CMake 3.10+
 
-### 运行时错误
+### Runtime Errors
 
-如果程序无法运行，检查：
+If program cannot run, check:
 
-1. 输入文件存在且格式正确
-2. 输出路径有写入权限
-3. 转换模式参数正确
+1. Input file exists and has correct format
+2. Output path has write permissions
+3. Conversion mode parameters are correct
 
-## 项目结构
+## Project Structure
 
 ```
 touchstone_converter/
-├── include/touchstone.h     # 头文件
+├── include/touchstone.h     # Header file
 ├── src/
-│   ├── main.cpp            # 主程序
-│   └── touchstone.cpp      # 核心实现
-├── examples/               # 示例文件
-├── build/                  # 编译输出
-├── .vscode/               # VS Code配置
-├── CMakeLists.txt         # CMake配置
-├── test_converter.sh      # 测试脚本
-├── QUICKSTART.md          # 本文档
-└── README.md              # 详细文档
+│   ├── main.cpp            # Main program
+│   └── touchstone.cpp      # Core implementation
+├── examples/               # Example files
+├── build/                  # Build output
+├── .vscode/               # VS Code configuration
+├── CMakeLists.txt         # CMake configuration
+├── test_converter.sh      # Test script
+├── QUICKSTART.md          # This document
+└── README.md              # Detailed documentation
 ```
 
-## 支持的格式
+## Supported Formats
 
-- **v1格式**: .s1p, .s2p, .s3p, .s4p
-- **v2格式**: .ts
-- **数据格式**: MA, DB_ANGLE, RI
-- **参数类型**: S, Y, Z, H, G, A
+- **v1 format**: .s1p, .s2p, .s3p, .s4p
+- **v2 format**: .ts
+- **Data formats**: MA, DB_ANGLE, RI
+- **Parameter types**: S, Y, Z, H, G, A

@@ -4,7 +4,7 @@
 echo "🔍 VS Code C++环境诊断..."
 echo
 
-# 颜色定义
+# Color定义
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -23,7 +23,7 @@ if command -v clang++ >/dev/null 2>&1; then
     CLANG_PATH=$(which clang++)
     echo -e "   路径: $CLANG_PATH"
 
-    # 测试头文件路径
+    # Test头文件路径
     TEST_FILE=$(mktemp)
     echo "#include <vector>" | clang++ -x c++ -E - > /dev/null 2>&1
     if [ $? -eq 0 ]; then
@@ -74,7 +74,7 @@ SDK_PATHS=(
 for path in "${SDK_PATHS[@]}"; do
     if [ -d "$path" ]; then
         echo -e "${GREEN}✓ 找到SDK路径: $path${NC}"
-        # 检查关键头文件
+        # Check关键头文件
         if [ -f "$path/vector" ]; then
             echo -e "  ✓ 包含vector"
         else
@@ -92,7 +92,7 @@ echo -e "${YELLOW}5. 检查项目配置:${NC}"
 if [ -f ".vscode/c_cpp_properties.json" ]; then
     echo -e "${GREEN}✓ 找到c_cpp_properties.json${NC}"
 
-    # 检查配置内容
+    # Check配置内容
     if grep -q "includePath" .vscode/c_cpp_properties.json; then
         echo -e "  ✓ 包含includePath配置"
     else
@@ -121,7 +121,7 @@ echo -e "${YELLOW}6. 检查源文件:${NC}"
 if [ -f "include/touchstone.h" ]; then
     echo -e "${GREEN}✓ 找到头文件: include/touchstone.h${NC}"
 
-    # 检查头文件内容
+    # Check头文件内容
     if grep -q "#include <vector>" include/touchstone.h; then
         echo -e "  ✓ 使用vector头文件"
     else
